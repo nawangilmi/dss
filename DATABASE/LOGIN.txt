@@ -1,0 +1,11 @@
+Akun MANAJER
+user : manajer
+pass : manajer
+
+Akun ATASAN
+user : atasan
+pass : atasan
+
+Akun KEPEGAWAIAN
+user : pegawai
+pass : pegawai
