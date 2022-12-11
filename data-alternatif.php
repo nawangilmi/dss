@@ -1,11 +1,11 @@
 <?php
 include_once('includes/header.inc.php');
 include_once('includes/alternatif.inc.php');
-include_once('includes/nilai-awal.inc.php');
+// include_once('includes/nilai-awal.inc.php');
 $altObj = new Alternatif($db);
 $count = $altObj->countAll();
 
-$nilObj = new NilaiAwal($db);
+$nilObj = new Alternatif($db);
 
 if (isset($_POST['hapus-contengan'])) {
     $imp = "('".implode("','", array_values($_POST['checkbox']))."')";
@@ -61,14 +61,14 @@ if (isset($_POST['hapus-contengan'])) {
           <tr>
             <th width="10px"><input type="checkbox" name="select-all" id="select-all" /></th>
             <th>ID Alternatif</th>
-            <th>Nik</th>
-            <th>Nama</th>
-            <th>Tempat, Tanggal Lahir</th>
-            <th>Kelamin</th>
-            <th>Jabatan</th>
-            <th>Tanggal Masuk</th>
+            <th>Nama Desa</th>
+            <th>Jumlah Sekolah</th>
+            <th>Jumlah Guru</th>
+            <th>Jumlah Murid</th>
+            <th>Jumlah Tidak Bersekolah</th>
+            <!-- <th>Tanggal Masuk</th>
             <th>Pendidikan</th>
-            <th>Nilai</th>
+            <th>Nilai</th> -->
             <th width="100px">Aksi</th>
           </tr>
         </thead>
@@ -77,20 +77,11 @@ if (isset($_POST['hapus-contengan'])) {
             <tr>
               <td><input type="checkbox" value="<?=$row['id_alternatif']?>" name="checkbox[]" /></td>
               <td><?=$row['id_alternatif']?></td>
-              <td><?=$row['nik']?></td>
               <td><?=$row['nama']?></td>
-              <td><?=$row['tempat_lahir']?>, <?=$row['tanggal_lahir']?></td>
-              <td><?=$row['kelamin']?></td>
-              <td><?=$row['jabatan']?></td>
-              <td><?=$row['tanggal_masuk']?></td>
-              <td><?=$row['pendidikan']?></td>
-              <td>
-                  <?php $nilObj->id_alternatif = $row['id_alternatif']; $nilObj->readByAlternatif(); if ($nilObj->id): ?>
-                      <?=$nilObj->nilai?> (<?=$nilObj->keterangan?>)
-                  <?php else: ?>
-                      <span class="label label-danger">Belum</span>
-                  <?php endif; ?>
-              </td>
+              <td><?=$row['jumlah_sekolah']?></td>
+              <td><?=$row['jumlah_guru']?></td>
+              <td><?=$row['jumlah_murid']?></td>
+              <td><?=$row['jumlah_tidak_bersekolah']?></td>
               <td class="text-center">
             		<a href="data-alternatif-ubah.php?id=<?=$row['id_alternatif']?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
             		<a href="data-alternatif-hapus.php?id=<?=$row['id_alternatif']?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>

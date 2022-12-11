@@ -10,15 +10,12 @@ $altObj->id = $id;
 $altObj->readOne();
 
 if ($_POST) {
-  	$altObj->nik = $_POST["nik"];
   	$altObj->nama = $_POST["nama"];
-  	$altObj->tempat_lahir = $_POST["tempat_lahir"];
+  	$altObj->jumlah_sekolah = $_POST["jumlah_sekolah"];
   	$altObj->tanggal_lahir = $_POST["tanggal_lahir"];
-  	$altObj->kelamin = $_POST["kelamin"];
-  	$altObj->alamat = $_POST["alamat"];
-  	$altObj->jabatan = $_POST["jabatan"];
-  	$altObj->tanggal_masuk = $_POST["tanggal_masuk"];
-  	$altObj->pendidikan = $_POST["pendidikan"];
+  	$altObj->jumlah_guru = $_POST["jumlah_guru"];
+  	$altObj->jumlah_murid = $_POST["jumlah_murid"];
+  	$altObj->jumlah_tidak_bersekolah = $_POST["jumlah_tidak_bersekolah"];
     if ($altObj->update()) {
         echo "<script>location.href='data-alternatif.php'</script>";
     } else { ?>
@@ -49,44 +46,24 @@ if ($_POST) {
                 <input type="text" name="id" id="id" class="form-control" autofocus="on" readonly="on" value="<?php echo $altObj->id; ?>">
             </div>
             <div class="form-group">
-                <label for="nik">Nomor Induk Karyawan</label>
-                <input type="text" name="nik" id="nik" class="form-control" autofocus="on" required="on" value="<?php echo $altObj->nik; ?>">
-            </div>
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
+                <label for="nama">Nama Desa</label>
                 <input type="text" name="nama" id="nama" class="form-control" required="on" value="<?php echo $altObj->nama; ?>">
             </div>
             <div class="form-group">
-                <label for="tempat_lahir">Tempat Lahir</label>
-                <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" required="on" value="<?php echo $altObj->tempat_lahir; ?>">
+                <label for="jumlah_sekolah">Jumlah Sekolah</label>
+                <input type="number" name="jumlah_sekolah" id="jumlah_sekolah" class="form-control" required="on" value="<?php echo $altObj->jumlah_sekolah; ?>">
             </div>
             <div class="form-group">
-                <label for="tanggal_lahir">Tanggal Lahir</label>
-                <input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control datepicker" required="on" value="<?php echo $altObj->tanggal_lahir; ?>">
+                <label for="jumlah_guru">Jumlah Guru</label>
+                <input type="number" name="jumlah_guru" id="jumlah_guru" class="form-control" required="on" value="<?php echo $altObj->jumlah_guru; ?>">
             </div>
             <div class="form-group">
-                <label for="kelamin">Jenis Kelamin</label>
-                <select class="form-control" name="kelamin" id="kelamin" required="on">
-                    <option value="">---</option>
-                    <option value="pria"<?=($altObj->kelamin == "pria")? "selected=\"on\"" : "" ?>>Pria</option>
-                    <option value="wanita"<?=($altObj->kelamin == "wanita")? "selected=\"on\"" : "" ?>>Wanita</option>
-                </select>
+                <label for="jumlah_murid">Jumlah Murid</label>
+                <input type="number" name="jumlah_murid" id="jumlah_murid" class="form-control" required="on" value="<?php echo $altObj->jumlah_murid; ?>">
             </div>
             <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <input type="text" name="alamat" id="alamat" class="form-control" required="on" value="<?php echo $altObj->alamat; ?>">
-            </div>
-            <div class="form-group">
-                <label for="jabatan">Jabatan</label>
-                <input type="text" name="jabatan" id="jabatan" class="form-control" required="on" value="<?php echo $altObj->jabatan; ?>">
-            </div>
-            <div class="form-group">
-                <label for="tanggal_masuk">Tanggal Masuk</label>
-                <input type="text" name="tanggal_masuk" id="tanggal_masuk" class="form-control datepicker" required="on" value="<?php echo $altObj->tanggal_masuk; ?>">
-            </div>
-            <div class="form-group">
-                <label for="pendidikan">Pendidikan</label>
-                <input type="text" name="pendidikan" id="pendidikan" class="form-control" required="on" value="<?php echo $altObj->pendidikan; ?>">
+                <label for="jumlah_tidak_bersekolah">Jumlah Tidak Bersekolah</label>
+                <input type="number" name="jumlah_tidak_bersekolah" id="jumlah_tidak_bersekolah" class="form-control" required="on" value="<?php echo $altObj->jumlah_tidak_bersekolah; ?>">
             </div>
             <div class="btn-group">
               <button type="submit" class="btn btn-dark">Ubah</button>

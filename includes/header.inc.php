@@ -44,6 +44,7 @@ $db = $config->getConnection();
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
                         <li role="presentation"><a href="data-kriteria.php">Kriteria</a></li>
+                        <li role="presentation"><a href="data-alternatif.php">Alternatif</a></li>
                         <li role="presentation"><a href="nilai.php">Nilai Preferensi</a></li>
                         <!-- <li role="presentation"><a href="nilai-awal.php">Nilai Awal</a></li> -->
                         <li class="dropdown">

@@ -26,9 +26,10 @@ $stmt2 = $pro2->readAll();
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div style="text-align: center;">
 			<h2>SPK Metode Analytical Hierarchy Process (AHP)</h2>
-			Pemilihan Desa Untuk Pemerataan Pendidikan Tingkat Sekolah Dasar
+			Pemilihan Desa Untuk Pemerataan Pendidikan Tingkat Sekolah Dasar Pada Kabupaten Sumedang
 			<!-- <img width="900px" height="auto" src="assets/images/pegawai.jpg"> -->
 			</div>
+			<br>
 			<!-- <div id="container2" style="min-width: 100%; height: 400px; margin: 0 auto"></div> -->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-4">
