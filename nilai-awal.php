@@ -1,5 +1,7 @@
 <?php
 include_once('includes/header.inc.php');
+
+// from tabel nilai awal
 include_once('includes/nilai-awal.inc.php');
 $pro = new NilaiAwal($db);
 $stmt = $pro->readAll();

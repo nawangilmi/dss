@@ -4,37 +4,27 @@ class Alternatif {
 	private $table_name = "data_alternatif";
 
 	public $id;
-	public $nik;
 	public $nama;
-	public $tempat_lahir;
-	public $tanggal_lahir;
-	public $kelamin;
-	public $alamat;
-	public $jabatan;
-	public $tanggal_masuk;
-	public $pendidikan;
+	public $jumlah_sekolah;
+	public $jumlah_guru;
+	public $jumlah_murid;
+	public $jumlah_tidak_bersekolah;
 	public $hasil_akhir;
-	public $skor_alternatif;
-
-	public $periode;
 
 	public function __construct($db) {
 		$this->conn = $db;
 	}
 
 	function insert() {
-		$query = "INSERT INTO {$this->table_name} VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
+		$query = "INSERT INTO {$this->table_name} VALUES(?, ?, ?, ?, ?, ?, NULL)";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
-		$stmt->bindParam(2, $this->nik);
-		$stmt->bindParam(3, $this->nama);
-		$stmt->bindParam(4, $this->tempat_lahir);
-		$stmt->bindParam(5, $this->tanggal_lahir);
-		$stmt->bindParam(6, $this->kelamin);
-		$stmt->bindParam(7, $this->alamat);
-		$stmt->bindParam(8, $this->jabatan);
-		$stmt->bindParam(9, $this->tanggal_masuk);
-		$stmt->bindParam(10, $this->pendidikan);
+		$stmt->bindParam(2, $this->nama);
+		$stmt->bindParam(3, $this->jumlah_sekolah);
+		$stmt->bindParam(4, $this->jumlah_guru);
+		$stmt->bindParam(5, $this->jumlah_murid);
+		$stmt->bindParam(6, $this->jumlah_tidak_bersekolah);
+		$stmt->bindParam(7, $this->hasil_akhir);
 
 		if ($stmt->execute()) {
 			return true;
@@ -59,36 +49,32 @@ class Alternatif {
 		return $stmt;
 	}
 
-	function countByFilter() {
-		$query = "SELECT * FROM {$this->table_name} a JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif WHERE b.keterangan='B' ";
-		$stmt = $this->conn->prepare( $query );
-		$stmt->execute();
+	// function countByFilter() {
+	// 	$query = "SELECT * FROM {$this->table_name} a JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif WHERE b.keterangan='B' ";
+	// 	$stmt = $this->conn->prepare( $query );
+	// 	$stmt->execute();
 
-		return $stmt->rowCount();
-	}
+	// 	return $stmt->rowCount();
+	// }
 
-	function readAllWithNilai() {
-		$query = "SELECT *, b.nilai, b.keterangan
-				FROM {$this->table_name} a
-					JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif
-				WHERE a.id_alternatif IN (SELECT id_alternatif FROM nilai_awal)
-				ORDER BY a.id_alternatif";
-		$stmt = $this->conn->prepare($query);
-		$stmt->execute();
+	// function readAllWithNilai() {
+	// 	$query = "SELECT *, b.nilai, b.keterangan
+	// 			FROM {$this->table_name} a
+	// 				JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif
+	// 			WHERE a.id_alternatif IN (SELECT id_alternatif FROM nilai_awal)
+	// 			ORDER BY a.id_alternatif";
+	// 	$stmt = $this->conn->prepare($query);
+	// 	$stmt->execute();
 
-		return $stmt;
-	}
+	// 	return $stmt;
+	// }
 
 	function readByRank() {
 		$query = "SELECT *
-				FROM {$this->table_name} a
-					JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif
-				WHERE b.keterangan='B'
-					AND b.periode=?
+				FROM {$this->table_name}
 				ORDER BY hasil_akhir DESC
 				LIMIT 0,5";
 		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(1, $this->periode);
 		$stmt->execute();
 
 		return $stmt;
@@ -110,39 +96,29 @@ class Alternatif {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id = $row["id_alternatif"];
-		$this->nik = $row["nik"];
 		$this->nama = $row["nama"];
-		$this->tempat_lahir = $row["tempat_lahir"];
-		$this->tanggal_lahir = $row["tanggal_lahir"];
-		$this->kelamin = $row["kelamin"];
-		$this->alamat = $row["alamat"];
-		$this->jabatan = $row["jabatan"];
-		$this->tanggal_masuk = $row["tanggal_masuk"];
-		$this->pendidikan = $row["pendidikan"];
+		$this->jumlah_sekolah = $row["jumlah_sekolah"];
+		$this->jumlah_guru = $row["jumlah_guru"];
+		$this->jumlah_murid = $row["jumlah_murid"];
+		$this->jumlah_tidak_bersekolah = $row["jumlah_tidak_bersekolah"];
 		$this->hasil_akhir = $row["hasil_akhir"];
-		// $this->skor_alternatif = $row['skor_alternatif'];
 	}
 
-	function readOneByNik(){
-		$query = "SELECT * FROM {$this->table_name} WHERE nik=? LIMIT 0,1";
-		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(1, $this->nik);
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	// function readOneByNik(){
+	// 	$query = "SELECT * FROM {$this->table_name} WHERE  LIMIT 0,1";
+	// 	$stmt = $this->conn->prepare($query);
+	// 	$stmt->bindParam(1, $this->nik);
+	// 	$stmt->execute();
+	// 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		$this->id = $row["id_alternatif"];
-		$this->nik = $row["nik"];
-		$this->nama = $row["nama"];
-		$this->tempat_lahir = $row["tempat_lahir"];
-		$this->tanggal_lahir = $row["tanggal_lahir"];
-		$this->kelamin = $row["kelamin"];
-		$this->alamat = $row["alamat"];
-		$this->jabatan = $row["jabatan"];
-		$this->tanggal_masuk = $row["tanggal_masuk"];
-		$this->pendidikan = $row["pendidikan"];
-		$this->hasil_akhir = $row["hasil_akhir"];
-		// $this->skor_alternatif = $row['skor_alternatif'];
-	}
+	// 	$this->id = $row["id_alternatif"];
+	// 	$this->nama = $row["nama"];
+	// 	$this->jumlah_sekolah = $row["jumlah_sekolah"];
+	// 	$this->jumlah_guru = $row["jumlah_guru"];
+	// 	$this->jumlah_murid = $row["jumlah_murid"];
+	// 	$this->jumlah_tidak_bersekolah = $row["jumlah_tidak_bersekolah"];
+	// 	$this->hasil_akhir = $row["hasil_akhir"];
+	// }
 
 	function readSatu($a) {
 		$query = "SELECT * FROM {$this->table_name} WHERE id_alternatif='$a' LIMIT 0,1";
@@ -179,28 +155,20 @@ class Alternatif {
 	function update() {
 		$query = "UPDATE {$this->table_name}
 				SET
-					nik = :nik,
 					nama = :nama,
-					tempat_lahir = :tempat_lahir,
-					tanggal_lahir = :tanggal_lahir,
-					kelamin = :kelamin,
-					alamat = :alamat,
-					jabatan = :jabatan,
-					tanggal_masuk = :tanggal_masuk,
-					pendidikan = :pendidikan
+					jumlah_sekolah = :jumlah_sekolah,
+					jumlah_guru = :jumlah_guru,
+					jumlah_murid = :jumlah_murid,
+					jumlah_tidak_bersekolah = :jumlah_tidak_bersekolah,
 				WHERE
 					id_alternatif = :id";
 		$stmt = $this->conn->prepare($query);
 
-		$stmt->bindParam(':nik', $this->nik);
 		$stmt->bindParam(':nama', $this->nama);
-		$stmt->bindParam(':tempat_lahir', $this->tempat_lahir);
-		$stmt->bindParam(':tanggal_lahir', $this->tanggal_lahir);
-		$stmt->bindParam(':kelamin', $this->kelamin);
-		$stmt->bindParam(':alamat', $this->alamat);
-		$stmt->bindParam(':jabatan', $this->jabatan);
-		$stmt->bindParam(':tanggal_masuk', $this->tanggal_masuk);
-		$stmt->bindParam(':pendidikan', $this->pendidikan);
+		$stmt->bindParam(':jumlah_sekolah', $this->jumlah_sekolah);
+		$stmt->bindParam(':jumlah_guru', $this->jumlah_guru);
+		$stmt->bindParam(':jumlah_murid', $this->jumlah_murid);
+		$stmt->bindParam(':jumlah_tidak_bersekolah', $this->jumlah_tidak_bersekolah);
 		$stmt->bindParam(':id', $this->id);
 
 		if ($stmt->execute()) {

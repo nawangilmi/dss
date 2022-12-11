@@ -45,7 +45,7 @@ $stmtx2y = $ranObj->readBob();
 				</tr>
 	    </thead>
 			<tbody>
-				<?php $alt1a = $altObj->readByFilter(); while ($row1 = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
+				<?php $alt1a = $altObj->readAll(); while ($row1 = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
 					<tr>
 						<th class="active"><?=$row1['nama']?></th>
 						<?php $a = $row1['id_alternatif']; ?>
@@ -100,7 +100,7 @@ $stmtx2y = $ranObj->readBob();
 	      </tr>
 	    </thead>
 	    <tbody>
-				<?php $alt1b = $altObj->readByFilter(); while ($row1 = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
+				<?php $alt1b = $altObj->readAll(); while ($row1 = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
 	        <tr>
 	          <th class="active"><?=$row1['nama']?></th>
 	          <?php $a1 = $row1['id_alternatif']; ?>

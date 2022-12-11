@@ -10,12 +10,15 @@ $skoObj = new Skor($db);
 $kriObj = new Kriteria($db);
 $nilObj = new Nilai($db);
 
-$altCount = $altObj->countByFilter();
+// $altCount = $altObj->countByFilter();
 
 $no = 1; $r = []; $nid = [];
-$alt1 = $altObj->readByFilter();
+$alt1 = $altObj->readAll();
+
+$altCount = $altObj->countAll();
+
 while ($row = $alt1->fetch(PDO::FETCH_ASSOC)){
-	$alt2 = $altObj->readByFilter();
+	$alt2 = $altObj->readAll();
 	while ($roww = $alt2->fetch(PDO::FETCH_ASSOC)) {
 		$nid[$row['id_alternatif']][] = $roww['id_alternatif'];
 	}
@@ -43,35 +46,30 @@ array_splice($nid, $ne, 1);
 		<table width="100%" class="table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th width="50px"></th>
+					<!-- <th width="50px"></th> -->
 					<th width="50px">No</th>
 					<th>ID</th>
 					<th>Nama</th>
-					<th>Nilai</th>
-					<th>Keterangan</th>
+					<!-- <th>Nilai</th>
+					<th>Keterangan</th> -->
 				</tr>
 			</thead>
 			<tbody>
-				<?php $no=1; $alt1a = $altObj->readByFilter(); while($row = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
-					<tr>
-						<td class="text-center">
-							<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modalNilaiDetail" data-id-alternatif="<?=$row["id_alternatif"]?>"><span class="fa fa-eye" aria-hidden="true"></span></button>
-						</td>
-						<td><?=$no++?></td>
-						<td><?=$row["id_alternatif"]?></td>
-						<td><?=$row["nama"]?></td>
-						<td><?=$row["nilai"]?></td>
-						<td><?php
-								if ($row['keterangan'] == "B") {
-									echo "Baik";
-								}elseif($row['keterangan'] == "C"){
-									echo "Cukup";
-								}else{
-									echo "Kurang";
-								}
-							?></td>
-					</tr>
-				<?php endwhile; ?>
+				<!-- munculin ID alternatif sama nama -->
+				<?php $no=1; foreach($r as $k => $v): ?>
+					<?php for($i=1; $i<=$v; $i++): ?>
+						<?php $rows = $altObj->readSatu($k); while($row = $rows->fetch(PDO::FETCH_ASSOC)): ?>
+							<tr>
+								<td class="text-center">
+									<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modalNilaiDetail" data-id-alternatif="<?=$row["id_alternatif"]?>"><span class="fa fa-eye" aria-hidden="true"></span></button>
+								</td>
+								<td><?=$no++?></td>
+								<td><?=$row["id_alternatif"]?></td>
+								<td><?=$row["nama"]?></td>
+							</tr>
+						<?php endwhile; ?>
+					<?php endfor; ?>
+				<?php endforeach; ?>
 			</tbody>
 		</table>
 
@@ -153,7 +151,7 @@ array_splice($nid, $ne, 1);
 	</div>
 </div>
 
-<div class="modal fade" id="myModalalt" tabindex="-1" role="dialog" aria-labelledby="myModalLabelalt">
+<!-- <div class="modal fade" id="myModalalt" tabindex="-1" role="dialog" aria-labelledby="myModalLabelalt">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -185,6 +183,6 @@ array_splice($nid, $ne, 1);
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <?php include_once('includes/footer.inc.php'); ?>

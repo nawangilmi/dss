@@ -12,12 +12,12 @@ if (isset($altkriteria)) {
 	$count = $skoObj->countAll();
 
 	if (isset($_POST['submit'])) {
-		$altCount = $altObj->countByFilter();
+		$altCount = $altObj->countAll();
 
 		$no=1; $r = []; $nid = [];
-		$alt1 = $altObj->readByFilter();
+		$alt1 = $altObj->readAll();
 		while ($row = $alt1->fetch(PDO::FETCH_ASSOC)){
-			$alt2 = $altObj->readByFilter();
+			$alt2 = $altObj->readAll();
 			while ($roww = $alt2->fetch(PDO::FETCH_ASSOC)) {
 				$nid[$row['id_alternatif']][] = $roww['id_alternatif'];
 			}
@@ -87,16 +87,16 @@ if (isset($altkriteria)) {
         <thead>
 					<tr>
 						<th><?=$skoObj->kri?></th>
-						<?php $alt1a = $altObj->readByFilter(); while ($row = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
+						<?php $alt1a = $altObj->readAll(); while ($row = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
 							<th><?=$row['nama']?></th>
 						<?php endwhile; ?>
 					</tr>
         </thead>
 				<tbody>
-					<?php $alt2a = $altObj->readByFilter(); while ($baris = $alt2a->fetch(PDO::FETCH_ASSOC)): ?>
+					<?php $alt2a = $altObj->readAll(); while ($baris = $alt2a->fetch(PDO::FETCH_ASSOC)): ?>
 						<tr>
 							<th class="active"><?=$baris['nama']?></th>
-							<?php $alt3a = $altObj->readByFilter(); while ($kolom = $alt3a->fetch(PDO::FETCH_ASSOC)): ?>
+							<?php $alt3a = $altObj->readAll(); while ($kolom = $alt3a->fetch(PDO::FETCH_ASSOC)): ?>
 								<td>
 								<?php
 									if ($baris['id_alternatif'] == $kolom['id_alternatif']) {
@@ -117,7 +117,7 @@ if (isset($altkriteria)) {
         <tfoot>
          	<tr class="info">
 						<th>Jumlah</th>
-						<?php /*$jumlahBobot=[];*/ $alt4a = $altObj->readByFilter(); while ($row = $alt4a->fetch(PDO::FETCH_ASSOC)): ?>
+						<?php /*$jumlahBobot=[];*/ $alt4a = $altObj->readAll(); while ($row = $alt4a->fetch(PDO::FETCH_ASSOC)): ?>
 						<th>
 							<?php
 								$skoObj->readSum1($row['id_alternatif'], $altkriteria);
@@ -137,17 +137,17 @@ if (isset($altkriteria)) {
 	      <thead>
 		      <tr>
 	          <th>Perbandingan</th>
-	          <?php $alt1b = $altObj->readByFilter(); while ($row = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
+	          <?php $alt1b = $altObj->readAll(); while ($row = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
 		          <th><?=$row['nama']?></th>
 	          <?php endwhile; ?>
 	          <th class="success">Prioritas</th>
 		      </tr>
 	      </thead>
 	      <tbody>
-					<?php $alt2b = $altObj->readByFilter(); while ($baris = $alt2b->fetch(PDO::FETCH_ASSOC)): ?>
+					<?php $alt2b = $altObj->readAll(); while ($baris = $alt2b->fetch(PDO::FETCH_ASSOC)): ?>
 		        <tr>
 		          <th class="active"><?=$baris['nama']?></th>
-		          <?php $alt3b = $altObj->readByFilter(); while ($kolom = $alt3b->fetch(PDO::FETCH_ASSOC)): ?>
+		          <?php $alt3b = $altObj->readAll(); while ($kolom = $alt3b->fetch(PDO::FETCH_ASSOC)): ?>
 		            <td>
 		            	<?php
 		                $skoObj->readAll3($kolom['id_alternatif'], $altkriteria);

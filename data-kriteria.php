@@ -1,5 +1,7 @@
 <?php
 include_once('includes/header.inc.php');
+
+// from tabel data_kriteria
 include_once('includes/kriteria.inc.php');
 
 $pro = new Kriteria($db);
