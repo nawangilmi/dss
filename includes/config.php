@@ -1,7 +1,7 @@
 <?php
 class Config {
   private $host = "localhost";
-  private $db_name = "spvahap";
+  private $db_name = "spvahap-try";
   private $username = "root";
   private $password = "";
   public $conn;

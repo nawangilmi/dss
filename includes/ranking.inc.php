@@ -98,6 +98,16 @@ class Ranking {
 
 		return $stmt;
 	}
+	function readHasil3($a){
+
+		// $query = "SELECT sum(hasil_alt_kri) as bbn FROM jum_alt_kri WHERE id_alternatif='$a' LIMIT 0,1";
+		$query = "SELECT sum(hasil_alt_kri) as bbn FROM jum_alt_kri WHERE id_alternatif='$a' ORDER BY bbn DESC";
+
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+
+		return $stmt;
+	}
 
 	function readHasil2($a){
 
@@ -178,12 +188,7 @@ class Ranking {
 
 	function hasil1(){
 
-		$query = "UPDATE
-					data_alternatif
-				SET
-					hasil_akhir = :has1
-				WHERE
-					id_alternatif = :ia";
+		$query = "UPDATE data_alternatif SET hasil_akhir = :has1 WHERE id_alternatif = :ia";
 
 		$stmt = $this->conn->prepare($query);
 

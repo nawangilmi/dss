@@ -132,25 +132,6 @@ $stmtx2y = $ranObj->readBob();
 						</td>
 	        </tr>
 				<?php endwhile; ?>
-				<!-- <tr>
-					<th>Jumlah</th>
-					<?php //while ($rowx2 = $stmtx2y->fetch(PDO::FETCH_ASSOC)): ?>
-	          <td>
-							<?php
-								// $stmtx3y = $ranObj->readMax($rowx2['id_kriteria']);
-								// $rowx3 = $stmtx3y->fetch(PDO::FETCH_ASSOC);
-								// echo number_format($rowx3['mnr1'], 5, '.', ',');
-							?>
-						</td>
-		      <?php //endwhile; ?>
-					<td>
-						<?php
-							// $stmtx4y = $ranObj->readMax2();
-							// $rowx4 = $stmtx4y->fetch(PDO::FETCH_ASSOC);
-							// echo number_format($rowx4['mnr2'], 5, '.', ',');
-						?>
-					</td>
-				</tr> -->
 	    </tbody>
 	  </table>
 		<hr>

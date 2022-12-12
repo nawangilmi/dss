@@ -6,6 +6,7 @@ include_once('includes/alternatif.inc.php');
 $skoObj = new Skor($db);
 $altObj = new Alternatif($db);
 $altkriteria = isset($_POST['kriteria']) ? $_POST['kriteria'] : $_GET['kriteria'];
+// $altkriteria = isset($_POST['alternatif']) ? $_POST['alternatif'] : $_GET['alternatif'];
 
 if (isset($altkriteria)) {
 	$skoObj->readKri($altkriteria);

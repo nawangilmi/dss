@@ -16,7 +16,7 @@ class Alternatif {
 	}
 
 	function insert() {
-		$query = "INSERT INTO {$this->table_name} VALUES(?, ?, ?, ?, ?, ?, NULL)";
+		$query = "INSERT INTO {$this->table_name} VALUES(?, ?, ?, ?, ?, ?, ?)";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 		$stmt->bindParam(2, $this->nama);
@@ -41,6 +41,14 @@ class Alternatif {
 		return $stmt;
 	}
 
+	function readByRank2() {
+		$query = "SELECT * FROM {$this->table_name} ORDER BY id_alternatif ASC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+
+		return $stmt;
+	}
+
 	function readByFilter() {
 		$query = "SELECT * FROM {$this->table_name} a JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif WHERE b.keterangan='B'";
 		$stmt = $this->conn->prepare( $query );
@@ -48,6 +56,16 @@ class Alternatif {
 
 		return $stmt;
 	}
+
+	function readByFilter2() {
+		$query = "SELECT * FROM {$this->table_name} a JOIN data_alternatif b ON a.id_alternatif=b.id_alternatif";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+
 
 	// function countByFilter() {
 	// 	$query = "SELECT * FROM {$this->table_name} a JOIN nilai_awal b ON a.id_alternatif=b.id_alternatif WHERE b.keterangan='B' ";
@@ -79,6 +97,8 @@ class Alternatif {
 
 		return $stmt;
 	}
+
+
 
 	function countAll(){
 		$query = "SELECT * FROM {$this->table_name} ORDER BY id_alternatif ASC";
@@ -121,7 +141,7 @@ class Alternatif {
 	// }
 
 	function readSatu($a) {
-		$query = "SELECT * FROM {$this->table_name} WHERE id_alternatif='$a' LIMIT 0,1";
+		$query = "SELECT * FROM {$this->table_name} WHERE id_alternatif='$a' ORDER BY id_alternatif ASC LIMIT 0,1";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 

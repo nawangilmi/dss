@@ -1,5 +1,5 @@
 
-	<footer class="text-center">&copy;2020 My Coding</footer><hr>
+	<!-- <footer class="text-center">&copy;2020 My Coding</footer><hr> -->
 	</div>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>

@@ -15,6 +15,7 @@ $nilObj = new Nilai($db);
 $no = 1; $r = []; $nid = [];
 $alt1 = $altObj->readAll();
 
+
 $altCount = $altObj->countAll();
 
 while ($row = $alt1->fetch(PDO::FETCH_ASSOC)){
@@ -41,35 +42,29 @@ array_splice($nid, $ne, 1);
 		<ol class="breadcrumb">
 			<li><a href="index.php">Beranda</a></li>
 			<li class="active">Analisa Alternatif</li>
-			<li><a href="#" data-toggle="modal" data-target="#myModalalt">Tabel Analisa Alternatif</a></li>
+			<!-- <li><a href="analisa-alternatif-tabel.php" data-toggle="modal" data-target="#myModalalt">Tabel Analisa Alternatif</a></li> -->
+			<li><a href="analisa-alternatif-tabel.php">Tabel Analisa Alternatif</a></li>
 		</ol>
 		<table width="100%" class="table table-striped table-bordered">
 			<thead>
 				<tr>
 					<!-- <th width="50px"></th> -->
-					<th width="50px">No</th>
-					<th>ID</th>
-					<th>Nama</th>
+					<th>No </th>
+					<th>ID Alternatif</th>
+					<th>Nama Desa</th>
 					<!-- <th>Nilai</th>
 					<th>Keterangan</th> -->
 				</tr>
 			</thead>
 			<tbody>
 				<!-- munculin ID alternatif sama nama -->
-				<?php $no=1; foreach($r as $k => $v): ?>
-					<?php for($i=1; $i<=$v; $i++): ?>
-						<?php $rows = $altObj->readSatu($k); while($row = $rows->fetch(PDO::FETCH_ASSOC)): ?>
-							<tr>
-								<td class="text-center">
-									<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modalNilaiDetail" data-id-alternatif="<?=$row["id_alternatif"]?>"><span class="fa fa-eye" aria-hidden="true"></span></button>
-								</td>
-								<td><?=$no++?></td>
-								<td><?=$row["id_alternatif"]?></td>
-								<td><?=$row["nama"]?></td>
-							</tr>
-						<?php endwhile; ?>
-					<?php endfor; ?>
-				<?php endforeach; ?>
+				<?php $no=1; $alt1a = $altObj->readByFilter2(); while($row = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
+					<tr>
+						<td><?=$no++?></td>
+						<td><?=$row["id_alternatif"]?></td>
+						<td><?=$row["nama"]?></td>
+					</tr>
+				<?php endwhile; ?>
 			</tbody>
 		</table>
 

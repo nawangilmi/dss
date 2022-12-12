@@ -10,7 +10,7 @@ $db = $config->getConnection();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pemilihan Pegawai Terbaik</title>
+    <title>Pemilihan Desa</title>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
